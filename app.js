@@ -15,14 +15,14 @@ app.use(bodyParser.urlencoded({
 function detectword(stringmsg) {
 }
 
-reactword = function (keymsg, msg, callback){
+reactword = function (keymsg, msg, callback) {
     var answer = '';
     var link = '';
     var buttons = [];
     var buttoncore = [];
     var addans = '';
     var iscallback = 0;
-    
+
     switch (keymsg) {
         case '테스트':
             answer = "성공"
@@ -41,6 +41,29 @@ reactword = function (keymsg, msg, callback){
 
 
 app.use('/api', apiRouter);
+
+apiRouter.post('/test', function (req, res) {
+    //console.log(req.body);
+    var msg = req.body.userRequest.utterance;
+    var userid = req.body.userRequest.user.id;
+    var userlang = req.body.userRequest.lang;
+    console.log(msg);
+
+    const responseBody = {
+        version: "2.0",
+        template: {
+            outputs: [
+                {
+                    simpleText: {
+                        text: msg
+                    }
+                }
+            ]
+        }
+    };
+
+    res.status(200).send(responseBody);
+});
 
 apiRouter.post('/switch', function (req, res) {
     //console.log(req.body);
