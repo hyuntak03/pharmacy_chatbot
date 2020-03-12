@@ -4,7 +4,7 @@ const app = express();
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const fs = require('fs')
-var data = fs.readFileSync("pharmacy_data.json",'utf-8')
+var data = fs.readFileSync("pharmacy_data.json", 'utf-8')
 const obj = JSON.parse(data);
 
 const apiRouter = express.Router();
@@ -16,9 +16,9 @@ app.use(bodyParser.urlencoded({
 }));
 
 function detectword(stringmsg) {
-    if(stringmsg.includes("약국")){
-        return "스마트 약국"
-    }else {
+    if (stringmsg.includes("약국")) {
+        return "검색"
+    } else {
         return stringmsg
     }
 }
@@ -37,10 +37,24 @@ reactword = function (keymsg, msg, callback) {
             break;
         case '검색':
             var result = "";
-            for(var i = 0; i < obj.length; i++){
-                result += obj[i].name + " (" + obj[i].addr + ")\n"
+            var add = "약국을 선택해주세요"
+            var bttn = ""
+            for (var i = 0; i < obj.length; i++) {
+                if (msg == obj[i].name) {
+                    result += obj[i].name + " (" + obj[i].addr + ")\n"
+                    bttn += "'" + obj[i].name + " (" + obj[i].addr + ")" + "', "
+                }
             }
+            if(result == ""){
+                result = "검색 결과가 없습니다."
+                add = ""
+            }
+            bttn = bttn.slice(0,-1)
+            bttn = "[" + bttn + "]"
             answer = result;
+            addans = add;
+            buttons = bttn;
+            buttoncore = bttn;
             break;
         case '테스트':
             answer = "test"
