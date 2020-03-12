@@ -53,8 +53,8 @@ reactword = function (keymsg, msg, callback) {
             bttn = "[" + bttn + "]"
             answer = result;
             addans = add;
-            buttons = bttn;
-            buttoncore = bttn;
+            buttons = ['ㅅㄷㄴㅅ', 'ㅅㄷㄴㅅㅇ'];
+            buttoncore = ['ㅅㄷㄴㅅ', 'ㅅㄷㄴㅅㅇ'];
             break;
         case '테스트':
             answer = "test"
