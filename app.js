@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 function detectword(stringmsg) {
+    return stringmsg;
 }
 
 reactword = function (keymsg, msg, callback) {
@@ -25,7 +26,7 @@ reactword = function (keymsg, msg, callback) {
 
     switch (keymsg) {
         case '테스트':
-            answer = "성공"
+            answer = "test"
             break;
     }
     if (iscallback == 0) {
