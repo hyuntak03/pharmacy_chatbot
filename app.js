@@ -3,6 +3,9 @@ const express = require('express');
 const app = express();
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const fs = require('fs')
+var data = fs.readFileSync("pharmacy_data.json",'utf-8')
+const obj = JSON.parse(data);
 
 const apiRouter = express.Router();
 
@@ -31,6 +34,13 @@ reactword = function (keymsg, msg, callback) {
     switch (keymsg) {
         case '스마트 약국':
             answer = "약국 이름을 검색해주세요"
+            break;
+        case '검색':
+            var result = "";
+            for(var i = 0; i < obj.length; i++){
+                result += obj[i].name + " (" + obj[i].addr + ")\n"
+            }
+            answer = result;
             break;
         case '테스트':
             answer = "test"
