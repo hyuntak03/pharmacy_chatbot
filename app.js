@@ -13,7 +13,11 @@ app.use(bodyParser.urlencoded({
 }));
 
 function detectword(stringmsg) {
-    return stringmsg;
+    if(stringmsg.includes("약국")){
+        return "스마트 약국"
+    }else {
+        return stringmsg
+    }
 }
 
 reactword = function (keymsg, msg, callback) {
@@ -25,6 +29,9 @@ reactword = function (keymsg, msg, callback) {
     var iscallback = 0;
 
     switch (keymsg) {
+        case '스마트 약국':
+            answer = "약국 이름을 검색해주세요"
+            break;
         case '테스트':
             answer = "test"
             break;
