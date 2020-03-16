@@ -42,7 +42,7 @@ reactword = function (keymsg, msg, callback) {
             for (var i = 0; i < obj.length; i++) {
                 if (msg == obj[i].name) {
                     result += i + ". " + obj[i].name + " (" + obj[i].addr + ")\n\n"
-                    bttn[i] = i
+                    // bttn[i] = i
                 }
             }
             if(result == ""){
@@ -51,8 +51,8 @@ reactword = function (keymsg, msg, callback) {
             }
             answer = result;
             addans = add;
-            buttons = bttn;
-            buttoncore = [bttn];
+            // buttons = bttn;
+            // buttoncore = bttn;
             break;
         case '테스트':
             answer = "test"
