@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({
 function detectword(stringmsg) {
     if (stringmsg.includes("약국")) {
         return "검색"
+    } else if (stringmsg.includes("번")) {
     } else {
         return stringmsg
     }
@@ -38,6 +39,7 @@ reactword = function (keymsg, msg, callback) {
             break;
         case '검색':
             var result = "";
+            var text = "";
             var add = "약국 번호를 입력해주세요"
             var bttn = new Array();
             var num = 0;
@@ -47,7 +49,8 @@ reactword = function (keymsg, msg, callback) {
                 if (msg == obj[i].name) {
                     num +=1;
                     result += num + ". " + obj[i].name + " (" + obj[i].addr + ")\n\n"
-                    fs.writeFileSync("pharmacy_search.txt",search + "\n"+ id + ":" + result,'utf-8')
+                    text += ":"+num + ". " + obj[i].name + " (" + obj[i].addr + ")\n\n"
+                    fs.writeFileSync("pharmacy_search.txt",search + "\n" +"userid= "+ id + text,'utf-8')
                 }
             }
             if(result == ""){
@@ -64,6 +67,20 @@ reactword = function (keymsg, msg, callback) {
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
             answer = search;
             break;
+        case '1' :
+            var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
+            var result;
+            var ans;
+            search = search.split("userid= ")
+            var search_pharmacy = search[1].split(":")
+            for(var i = 0; i< search_pharmacy.length; i++){
+                if(search_pharmacy[i].includes(msg)){
+                    result = search_pharmacy[i].split('.')
+                    ans = result[1]
+                }
+            }
+            answer = ans + "\n\n선택되었습니다.";
+            addans = "재고 상태를 입력해주세요";
     }
     if (iscallback == 0) {
         var answerresult = [];
