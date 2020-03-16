@@ -73,11 +73,8 @@ reactword = function (keymsg, msg, callback) {
             var ans;
             search = search.split("userid= ")
             var search_pharmacy = search[1].split(":")
-            for(var i = 0; i< search_pharmacy.length; i++){
-                if(search_pharmacy[i].includes(msg)){
-                    result = search_pharmacy[i].split('.')
-                    ans = result[1]
-                }
+            for(var i = 0; i< search.length; i++){
+                ans += search[i] +"\n\n"
             }
             answer = ans + "\n\n선택되었습니다.";
             addans = "재고 상태를 입력해주세요";
