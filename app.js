@@ -69,6 +69,8 @@ reactword = function (keymsg, msg, callback) {
             break;
         case '1선' :
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
+            var status = fs.readFileSync("status.txt",'utf-8');
+            var pharmacy_status = "";
             var result;
             var ans;
             search = search.split("userid= ")
@@ -78,11 +80,22 @@ reactword = function (keymsg, msg, callback) {
                     if (search_pharmacy[i].includes(msg)) {
                         result = search_pharmacy[i].split('.')
                         ans = result[1]
+                        for(var i = 0; i< status.length; i++){
+                            if(status[i] == result[1]){
+                                pharmacy_status = status[i]
+                            }else {
+                                pharmacy_status = "정보 없음"
+                            }
+                        }
                     }
                 }
             }
-            answer = ans + "\n\n선택되었습니다.";
+            
+            answer = ans + "\n\n재고 상태: " + pharmacy_status ;
             addans = "재고 상태를 입력해주세요";
+            buttons = ["재고 충분", "재고 부족", "판매 종료", "정보 없음"]
+            buttoncore = ["재고 충분", "재고 부족", "판매 종료", "정보 없음"]
+            break;
     }
     if (iscallback == 0) {
         var answerresult = [];
