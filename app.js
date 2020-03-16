@@ -70,6 +70,7 @@ reactword = function (keymsg, msg, callback) {
         case '1선' :
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
             var status = fs.readFileSync("status.txt",'utf-8');
+            status = status.split("\n")
             var pharmacy_status = "";
             var result;
             var ans;
@@ -80,12 +81,10 @@ reactword = function (keymsg, msg, callback) {
                     if (search_pharmacy[i].includes(msg)) {
                         result = search_pharmacy[i].split('.')
                         ans = result[1]
-                        for(var i = 0; i< status.length; i++){
-                            if(status[i] == result[1]){
-                                pharmacy_status = status[i]
-                            }else {
-                                pharmacy_status = "정보 없음"
-                            }
+                        if (status[i].includes(result[1])) {
+                            pharmacy_status = status[i]
+                        } else {
+                            pharmacy_status = "정보 없음"
                         }
                     }
                 }
