@@ -40,11 +40,13 @@ reactword = function (keymsg, msg, callback) {
             var add = "약국 번호를 선택해주세요"
             var bttn = new Array();
             var num = 0;
+            var arr = 0;
             for (var i = 0; i < obj.length; i++) {
                 if (msg == obj[i].name) {
                     num +=1;
                     result += num + ". " + obj[i].name + " (" + obj[i].addr + ")\n\n"
-                    // bttn[i] = i
+                    bttn[arr] = num;
+                    arr ++;
                 }
             }
             if(result == ""){
@@ -53,8 +55,8 @@ reactword = function (keymsg, msg, callback) {
             }
             answer = result;
             addans = add;
-            // buttons = bttn;
-            // buttoncore = bttn;
+            buttons = bttn;
+            buttoncore = bttn;
             break;
         case '테스트':
             answer = "test"
