@@ -38,7 +38,7 @@ reactword = function (keymsg, msg, callback) {
         case '검색':
             var result = "";
             var add = "약국 번호를 선택해주세요"
-            var bttn = new Array;
+            var bttn = new Array();
             for (var i = 0; i < obj.length; i++) {
                 if (msg == obj[i].name) {
                     result += i + ". " + obj[i].name + " (" + obj[i].addr + ")\n\n"
