@@ -55,8 +55,8 @@ reactword = function (keymsg, msg, callback) {
             }
             answer = result;
             addans = add;
-            buttons = bttn;
-            buttoncore = bttn;
+            buttons = bttn[0];
+            buttoncore = bttn[0];
             break;
         case '테스트':
             answer = "test"
