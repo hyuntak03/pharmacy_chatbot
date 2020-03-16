@@ -49,7 +49,7 @@ reactword = function (keymsg, msg, callback) {
                 if (msg == obj[i].name) {
                     num +=1;
                     result += num + ". " + obj[i].name + " (" + obj[i].addr + ")\n\n"
-                    text += ":"+num + ". " + obj[i].name + " (" + obj[i].addr + ")\n\n"
+                    text += ":"+num +"선. " + obj[i].name + " (" + obj[i].addr + ")\n\n"
                     fs.writeFileSync("pharmacy_search.txt",search + "\n" +"userid= "+ id + text,'utf-8')
                 }
             }
@@ -67,14 +67,19 @@ reactword = function (keymsg, msg, callback) {
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
             answer = search;
             break;
-        case '1' :
+        case '1선' :
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
             var result;
             var ans;
             search = search.split("userid= ")
             var search_pharmacy = search[1].split(":")
-            for(var i = 0; i< search.length; i++){
-                ans += search[i] +"\n\n"
+            for (var i = 0; i < search.length; i++) {
+                if (search[i].includes(id)) {
+                    if (search_pharmacy[i].includes(msg)) {
+                        result = search_pharmacy[i].split('.')
+                        ans = result[1]
+                    }
+                }
             }
             answer = ans + "\n\n선택되었습니다.";
             addans = "재고 상태를 입력해주세요";
