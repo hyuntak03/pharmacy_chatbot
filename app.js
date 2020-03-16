@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs')
 var data = fs.readFileSync("pharmacy_data.json", 'utf-8')
 const obj = JSON.parse(data);
+var id;
 
 const apiRouter = express.Router();
 
@@ -37,16 +38,16 @@ reactword = function (keymsg, msg, callback) {
             break;
         case '검색':
             var result = "";
-            var add = "약국 번호를 선택해주세요"
+            var add = "약국 번호를 입력해주세요"
             var bttn = new Array();
             var num = 0;
-            var arr = 0;
+            var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
+
             for (var i = 0; i < obj.length; i++) {
                 if (msg == obj[i].name) {
                     num +=1;
                     result += num + ". " + obj[i].name + " (" + obj[i].addr + ")\n\n"
-                    bttn[arr] = num;
-                    arr ++;
+                    fs.writeFileSync("pharmacy_search.txt",search + "\n"+ id + ":" + result,'utf-8')
                 }
             }
             if(result == ""){
@@ -55,11 +56,13 @@ reactword = function (keymsg, msg, callback) {
             }
             answer = result;
             addans = add;
-            buttons = bttn[0];
-            buttoncore = bttn[0];
             break;
         case '테스트':
             answer = "test"
+            break;
+        case 'test':
+            var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
+            answer = search;
             break;
     }
     if (iscallback == 0) {
