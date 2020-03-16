@@ -37,22 +37,21 @@ reactword = function (keymsg, msg, callback) {
             break;
         case '검색':
             var result = "";
-            var add = "약국을 선택해주세요"
-            var bttn = ""
+            var add = "약국 번호를 선택해주세요"
+            var bttn = new Array;
             for (var i = 0; i < obj.length; i++) {
                 if (msg == obj[i].name) {
-                    result += obj[i].name + " (" + obj[i].addr + ")\n"
-                    bttn += "'" + obj[i].name + " (" + obj[i].addr + ")" + "', "
+                    result += i + ". " + obj[i].name + " (" + obj[i].addr + ")\n\n"
+                    bttn[i] = i
                 }
             }
             if(result == ""){
                 result = "검색 결과가 없습니다."
                 add = ""
             }
-            bttn = bttn.slice(0,-1)
             answer = result;
             addans = add;
-            buttons = [bttn];
+            buttons = bttn;
             buttoncore = [bttn];
             break;
         case '테스트':
