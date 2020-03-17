@@ -25,6 +25,10 @@ function detectword(stringmsg) {
     }
 }
 
+function test() {
+    return "실험"
+}
+
 reactword = function (keymsg, msg, callback) {
     var answer = '';
     var link = '';
@@ -62,6 +66,7 @@ reactword = function (keymsg, msg, callback) {
             break;
         case '테스트':
             answer = "test"
+            test();
             break;
         case 'test':
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
