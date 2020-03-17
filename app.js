@@ -66,7 +66,11 @@ reactword = function (keymsg, msg, callback) {
             break;
         case '테스트':
             answer = "test"
+            addans = "test start"
             test();
+            break;
+        case '실험':
+            answer = "실험 성공"
             break;
         case 'test':
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
