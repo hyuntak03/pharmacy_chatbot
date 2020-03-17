@@ -27,11 +27,13 @@ function detectword(stringmsg) {
 
 function status(pharmacy) {
     var status = fs.readFileSync("status.txt",'utf-8');
+    var a;
     var result;
+    status = status.split(":");
+    status = status[0];
     for(var i = 0; i< status.length; i++){
-        if(status.includes(pharmacy)){
-            result = status[i].split(":")
-            result = result[1]
+        if(status == pharmacy){
+            result = status[1];
         }else {
             result = "정보 없음"
         }
@@ -61,7 +63,6 @@ reactword = function (keymsg, msg, callback) {
             var result = "";
             var text = "";
             var add = "약국 번호를 입력해주세요"
-            var bttn = new Array();
             var num = 0;
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
 
@@ -111,7 +112,7 @@ reactword = function (keymsg, msg, callback) {
                 }
             }
             user_pharmacy(ans);
-            pharmacy_status = status(ans)
+            pharmacy_status = status(ans).toString();
             answer = ans + "\n\n재고 상태: " + pharmacy_status ;
             addans = "재고 상태를 입력해주세요";
             buttons = ["재고 충분", "재고 부족", "판매 종료", "정보 없음"]
