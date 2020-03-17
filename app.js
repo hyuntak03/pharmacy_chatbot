@@ -29,10 +29,11 @@ function status(pharmacy) {
     var status = fs.readFileSync("status.txt",'utf-8');
     var a;
     var result;
+    var search;
     status = status.split(":");
-    status = status[0];
-    for(var i = 0; i< status.length; i++){
-        if(status == pharmacy){
+    search = status[0].toString().replace(/\n/g, "")
+    for(var i = 0; i< search.length; i++){
+        if(search == pharmacy){
             result = status[1];
         }else {
             result = "정보 없음"
