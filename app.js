@@ -47,7 +47,7 @@ function user_pharmacy(pharmacy){
     fs.writeFileSync("pharmacy.txt","."+ data,'utf-8')
 }
 
-function num(msg){
+function num_detect(msg){
     msg = msg.toString().replace(/[^0-9]/g,'');
     msg = msg+"선";
     return msg;
@@ -103,7 +103,7 @@ reactword = function (keymsg, msg, callback) {
             answer = search;
             break;
         case '1선' :
-            var select_num = num(msg);
+            var select_num = num_detect(msg);
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
             var pharmacy_status;
             var result;
