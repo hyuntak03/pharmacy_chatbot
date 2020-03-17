@@ -28,7 +28,7 @@ function detectword(stringmsg) {
 function status(pharmacy) {
     var status = fs.readFileSync("status.txt",'utf-8');
     var a;
-    var result;
+    var result = "정보 없음";
     var search;
     status = status.split(":");
     search = status[0].toString().replace(/\n/g, "")
