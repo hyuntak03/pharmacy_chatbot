@@ -25,7 +25,7 @@ function detectword(stringmsg) {
     }
 }
 
-function test() {
+function a() {
     return "실험"
 }
 
@@ -67,7 +67,7 @@ reactword = function (keymsg, msg, callback) {
         case '테스트':
             answer = "test"
             addans = "test start"
-            test();
+            a();
             break;
         case '실험':
             answer = "실험 성공"
