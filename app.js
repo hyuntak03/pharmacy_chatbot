@@ -103,6 +103,7 @@ reactword = function (keymsg, msg, callback) {
             answer = search;
             break;
         case '1선' :
+            var select_num = num(msg);
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
             var pharmacy_status;
             var result;
@@ -111,7 +112,7 @@ reactword = function (keymsg, msg, callback) {
             var search_pharmacy = search[1].split(":")
             for (var i = 0; i < search.length; i++) {
                 if (search[i].includes(id)) {
-                    if (search_pharmacy[i].includes(msg)) {
+                    if (search_pharmacy[i].includes(select_num)) {
                         result = search_pharmacy[i].split('.')
                         ans = result[1].toString().replace(/\n/g, "")
                         ans = ans.trim()
