@@ -121,11 +121,11 @@ reactword = function (keymsg, msg, callback) {
             break;
         case "재고 충분":
             var data = fs.readFileSync("pharmacy.txt",'utf-8');
-            for(var i = 0; i < data.length; i++){
-                if(data.includes(id)){
-                    data = data.split(":");
-                    data = data[1]
-                    fs.writeFileSync("status.txt",data + ":" + msg,'utf-8');
+            data = data.split(":")
+            var search = data[0].toString().replace(/\n/g, "")
+            for(var i = 0; i < search.length; i++){
+                if(search == id){
+                    fs.writeFileSync("status.txt",data[1] + ":" + msg,'utf-8');
                 }
             }
             answer = "정보가 업데이트 되었습니다.";
