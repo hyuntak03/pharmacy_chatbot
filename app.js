@@ -83,6 +83,14 @@ reactword = function (keymsg, msg, callback) {
         case '테스트':
             answer = "test"
             break;
+        case 'pharmacy':
+            var data = fs.readFileSync("pharmacy.txt",'utf-8');
+            if(data == null){
+                answer = "정보 x"
+            }else {
+                answer = data;
+            }
+            break;
         case 'test':
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
             answer = search;
@@ -122,7 +130,11 @@ reactword = function (keymsg, msg, callback) {
             break;
         case "status":
             var data = fs.readFileSync("status.txt",'utf-8')
-            answer = data;
+            if(data == null){
+                answer = "정보 x"
+            }else {
+                answer = data;
+            }
             break;
     }
     if (iscallback == 0) {
