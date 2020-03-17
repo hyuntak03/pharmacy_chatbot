@@ -33,11 +33,10 @@ function status(pharmacy) {
     search = status[0].toString().replace(/\n/g, "")
     for(var i = 0; i< search.length; i++){
         if(search == pharmacy){
-            return status[1];
-        }else {
-            return result
+            result = status[1]
         }
     }
+    return result
 }
 
 function user_pharmacy(pharmacy){
@@ -106,7 +105,7 @@ reactword = function (keymsg, msg, callback) {
                 if (search[i].includes(id)) {
                     if (search_pharmacy[i].includes(msg)) {
                         result = search_pharmacy[i].split('.')
-                        ans = result[1]
+                        ans = result[1].toString()
                     }
                 }
             }
