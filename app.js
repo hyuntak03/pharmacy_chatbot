@@ -25,8 +25,24 @@ function detectword(stringmsg) {
     }
 }
 
-function a() {
-    return "실험"
+function status(pharmacy) {
+    var status = fs.readFileSync("status.txt",'utf-8');
+    var result;
+    for(var i = 0; i< status.length; i++){
+        if(status.includes(pharmacy)){
+            result = status[i].split(":")
+            result = result[1]
+        }else {
+            result = "정보 없음"
+        }
+    }
+    return result
+}
+
+function user_pharmacy(pharmacy){
+    var last_data = fs.readFileSync("pharmacy.txt",'utf-8')
+    var data = last_data + "\n" + id + ":" + pharmacy;
+    fs.writeFileSync("pharmacy.txt",data,'utf-8')
 }
 
 reactword = function (keymsg, msg, callback) {
@@ -73,9 +89,7 @@ reactword = function (keymsg, msg, callback) {
             break;
         case '1선' :
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
-            var status = fs.readFileSync("status.txt",'utf-8');
-            status = status.split("\n")
-            var pharmacy_status = "";
+            var pharmacy_status;
             var result;
             var ans;
             search = search.split("userid= ")
@@ -85,15 +99,26 @@ reactword = function (keymsg, msg, callback) {
                     if (search_pharmacy[i].includes(msg)) {
                         result = search_pharmacy[i].split('.')
                         ans = result[1]
+                        pharmacy_status = status(ans);
                     }
                 }
             }
-            
+            user_pharmacy(ans);
             answer = ans + "\n\n재고 상태: " + pharmacy_status ;
             addans = "재고 상태를 입력해주세요";
             buttons = ["재고 충분", "재고 부족", "판매 종료", "정보 없음"]
             buttoncore = ["재고 충분", "재고 부족", "판매 종료", "정보 없음"]
             break;
+        case "재고 충분":
+            var data = fs.readFileSync("pharmacy.txt",'utf-8');
+            for(var i = 0; i < data.length; i++){
+                if(data.includes(id)){
+                    data = data.split(":");
+                    data = data[1]
+                    fs.writeFileSync("status.txt",data + ":" + msg,'utf-8');
+                }
+            }
+            answer = "정보가 업데이트 되었습니다.";
     }
     if (iscallback == 0) {
         var answerresult = [];
