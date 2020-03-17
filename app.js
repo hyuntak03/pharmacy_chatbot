@@ -20,7 +20,9 @@ function detectword(stringmsg) {
     if (stringmsg.includes("약국")) {
         return "검색"
     } else if (stringmsg.includes("번")) {
-    } else {
+    } else if(isNaN(stringmsg) == true){
+        return "1선";
+    }else {
         return stringmsg
     }
 }
@@ -43,6 +45,12 @@ function user_pharmacy(pharmacy){
     var last_data = fs.readFileSync("pharmacy.txt",'utf-8')
     var data = last_data + "\n" + id + ":" + pharmacy;
     fs.writeFileSync("pharmacy.txt","."+ data,'utf-8')
+}
+
+function num(msg){
+    msg = msg.toString().replace(/[^0-9]/g,'');
+    msg = msg+"선";
+    return msg;
 }
 
 reactword = function (keymsg, msg, callback) {
@@ -117,6 +125,9 @@ reactword = function (keymsg, msg, callback) {
             buttons = ["재고 충분", "재고 부족", "판매 종료", "정보 없음"]
             buttoncore = ["재고 충분", "재고 부족", "판매 종료", "정보 없음"]
             break;
+        case "재고 부족":
+        case "판매 종료":
+        case "정보 없음":
         case "재고 충분":
             var last_data = fs.readFileSync("status.txt", 'utf-8')
             var data = fs.readFileSync("pharmacy.txt", 'utf-8');
