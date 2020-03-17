@@ -42,7 +42,7 @@ function status(pharmacy) {
 function user_pharmacy(pharmacy){
     var last_data = fs.readFileSync("pharmacy.txt",'utf-8')
     var data = last_data + "\n" + id + ":" + pharmacy;
-    fs.writeFileSync("pharmacy.txt",data,'utf-8')
+    fs.writeFileSync("pharmacy.txt","."+ data,'utf-8')
 }
 
 reactword = function (keymsg, msg, callback) {
@@ -117,12 +117,16 @@ reactword = function (keymsg, msg, callback) {
             buttoncore = ["재고 충분", "재고 부족", "판매 종료", "정보 없음"]
             break;
         case "재고 충분":
-            var data = fs.readFileSync("pharmacy.txt",'utf-8');
+            var data = fs.readFileSync("pharmacy.txt", 'utf-8');
+            var result;
+            data = data.split(".")
+            data = data[1];
             data = data.split(":")
             var search = data[0].toString().replace(/\n/g, "")
-            for(var i = 0; i < search.length; i++){
-                if(search == id){
-                    fs.writeFileSync("status.txt",data[1] + ":" + msg,'utf-8');
+            for (var i = 0; i < search.length; i++) {
+                if (search == id) {
+                    result = data[1].toString().replace(/\n/g, "")
+                    fs.writeFileSync("status.txt", data[1] + ":" + msg, 'utf-8');
                 }
             }
             answer = "정보가 업데이트 되었습니다.";
