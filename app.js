@@ -66,11 +66,6 @@ reactword = function (keymsg, msg, callback) {
             break;
         case '테스트':
             answer = "test"
-            addans = "test start"
-            a();
-            break;
-        case '실험':
-            answer = "실험 성공"
             break;
         case 'test':
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
@@ -90,11 +85,6 @@ reactword = function (keymsg, msg, callback) {
                     if (search_pharmacy[i].includes(msg)) {
                         result = search_pharmacy[i].split('.')
                         ans = result[1]
-                        if (status[i].includes(result[1])) {
-                            pharmacy_status = status[i]
-                        } else {
-                            pharmacy_status = "정보 없음"
-                        }
                     }
                 }
             }
