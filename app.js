@@ -21,7 +21,7 @@ function detectword(stringmsg) {
         return "검색"
     } else if (stringmsg.includes("번")) {
     } else if(isNaN(stringmsg) == true){
-        return "1선";
+        return "select";
     }else {
         return stringmsg
     }
@@ -102,7 +102,7 @@ reactword = function (keymsg, msg, callback) {
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
             answer = search;
             break;
-        case '1선' :
+        case 'select' :
             var select_num = num_detect(msg);
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
             var pharmacy_status;
