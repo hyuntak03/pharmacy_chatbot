@@ -120,6 +120,10 @@ reactword = function (keymsg, msg, callback) {
             }
             answer = "정보가 업데이트 되었습니다.";
             break;
+        case "status":
+            var data = fs.readFileSync("status.txt",'utf-8')
+            answer = data;
+            break;
     }
     if (iscallback == 0) {
         var answerresult = [];
