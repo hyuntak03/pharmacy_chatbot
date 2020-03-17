@@ -27,7 +27,6 @@ function detectword(stringmsg) {
 
 function status(pharmacy) {
     var status = fs.readFileSync("status.txt",'utf-8');
-    var a;
     var result = "정보 없음";
     var search;
     status = status.split(":");
@@ -108,11 +107,11 @@ reactword = function (keymsg, msg, callback) {
                     if (search_pharmacy[i].includes(msg)) {
                         result = search_pharmacy[i].split('.')
                         ans = result[1]
-                        pharmacy_status = status(ans);
                     }
                 }
             }
             user_pharmacy(ans);
+            pharmacy_status = status(ans);
             answer = ans + "\n\n재고 상태: " + pharmacy_status ;
             addans = "재고 상태를 입력해주세요";
             buttons = ["재고 충분", "재고 부족", "판매 종료", "정보 없음"]
