@@ -15,6 +15,12 @@ setInterval( function() {
     http.get("https://pharmacy-chatbot.herokuapp.com/")
 }, 900000)
 
+setInterval( function() {
+    fs.writeFileSync("pharmacy.txt","",'utf-8');
+    fs.writeFileSync("pharmacy_search.txt","",'utf-8');
+    fs.writeFileSync("status.txt","",'utf-8');
+}, 86400000)
+
 app.use(logger('dev', {}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
