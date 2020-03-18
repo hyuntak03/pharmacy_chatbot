@@ -121,17 +121,15 @@ reactword = function (keymsg, msg, callback) {
             var select_num = num_change(msg);
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
             var pharmacy_status;
-            var result;
+            var a,b;
             var ans;
             search = search.split("userid= ")
-            var search_pharmacy = search[1].split(":")
             for (var i = 0; i < search.length; i++) {
-                if (search[i].includes(id)) {
-                    if (search_pharmacy[i].includes(select_num)) {
-                        result = search_pharmacy[i].split('.')
-                        ans = result[1].toString().replace(/\n/g, "")
-                        ans = ans.trim()
-                    }
+                info = search[i].split(":")
+                a = info[1];
+                b = a.split(".");
+                if(b[0] == select_num){
+                    ans = b[1]
                 }
             }
             user_pharmacy(ans);
