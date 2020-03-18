@@ -4,11 +4,16 @@ const app = express();
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const fs = require('fs')
+const http = require('http')
 var data = fs.readFileSync("pharmacy_data.json", 'utf-8')
 const obj = JSON.parse(data);
 var id;
 
 const apiRouter = express.Router();
+
+setInterval( function() {
+    http.get("https://pharmacy-chatbot.herokuapp.com/")
+}, 900000)
 
 app.use(logger('dev', {}));
 app.use(bodyParser.json());
@@ -51,6 +56,9 @@ function user_pharmacy(pharmacy){
 
 function detect_num(msg){
     msg = msg.toString().replace(/[^0-9]/g,'');
+    if(msg == ""){
+        msg = "!num"
+    }
     return msg;
 }
 
