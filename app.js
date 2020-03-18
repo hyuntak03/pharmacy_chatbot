@@ -35,17 +35,17 @@ function detectword(stringmsg) {
 }
 
 function status(pharmacy) {
-    var status = fs.readFileSync("status.txt",'utf-8');
+    var status = fs.readFileSync("status.txt", 'utf-8');
     var result = "정보 없음";
-    var search;
-    status = status.split(":");
-    search = status[0].toString().replace(/\n/g, "")
-    for(var i = 0; i< search.length; i++){
-        if(search == pharmacy){
-            result = status[1]
+    var info;
+    status = status.split("\n");
+    for (var i = 0; i < status.length; i++) {
+        info = status[i].split(":")
+        if (info[0] == pharmacy) {
+            result = info[1];
         }
     }
-    return result
+    return result;
 }
 
 function user_pharmacy(pharmacy){
