@@ -61,7 +61,7 @@ function pharmacy_search(msg) {
             select_num = list.split(":")
         }
     }
-    search_2(select_num,msg)
+    return search_2(select_num,msg)
 }
 
 function search_2(select_num,msg){
@@ -146,7 +146,7 @@ reactword = function (keymsg, msg, callback) {
             break;
         case 'select' :
             var pharmacy_status;
-            var select_num = num_change(msg);
+            var select_num = num_change(msg).toString();
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
             var ans = pharmacy_search(select_num);
             user_pharmacy(ans);
