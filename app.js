@@ -17,10 +17,10 @@ app.use(bodyParser.urlencoded({
 }));
 
 function detectword(stringmsg) {
+    var num = detect_num(stringmsg);
     if (stringmsg.includes("약국")) {
         return "검색"
-    } else if (stringmsg.includes("번")) {
-    } else if(isNaN(stringmsg) == true){
+    }else if(isNaN(num) == false){
         return "select";
     }else {
         return stringmsg
@@ -47,7 +47,12 @@ function user_pharmacy(pharmacy){
     fs.writeFileSync("pharmacy.txt","."+ data,'utf-8')
 }
 
-function num_detect(msg){
+function detect_num(msg){
+    msg = msg.toString().replace(/[^0-9]/g,'');
+    return msg;
+}
+
+function num_change(msg){
     msg = msg.toString().replace(/[^0-9]/g,'');
     msg = msg+"선";
     return msg;
@@ -103,7 +108,7 @@ reactword = function (keymsg, msg, callback) {
             answer = search;
             break;
         case 'select' :
-            var select_num = num_detect(msg);
+            var select_num = num_change(msg);
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
             var pharmacy_status;
             var result;
