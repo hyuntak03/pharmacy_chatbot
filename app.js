@@ -48,6 +48,33 @@ function status(pharmacy) {
     return result;
 }
 
+function pharmacy_search(msg) {
+    var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
+    search = search.split("userid= ");
+    var result,userid,select_num;
+    for(var i = 0;i<search.length;i++){
+        result = search[i].split("&");
+        userid = result[0];
+        if(userid == id){
+            list = result[1].trim()
+            //console.log(list)
+            select_num = list.split(":")
+        }
+    }
+    search_2(select_num,msg)
+}
+
+function search_2(select_num,msg){
+    for(var i = 1;i<select_num.length;i++){
+        nlist = select_num[i].trim().split(".");
+        num = nlist[0];
+        if(num == msg){
+            addr = nlist[1].trim();
+        }
+    }
+    return addr;
+}
+
 function user_pharmacy(pharmacy){
     var last_data = fs.readFileSync("pharmacy.txt",'utf-8')
     var data = last_data + "\n" + id + ":" + pharmacy;
@@ -94,7 +121,7 @@ reactword = function (keymsg, msg, callback) {
                     text += ":"+num +"선. " + obj[i].name + " (" + obj[i].addr + ")\n\n"
                 }
             }
-            fs.writeFileSync("pharmacy_search.txt",search + "\n" +"userid= "+ id + text,'utf-8')
+            fs.writeFileSync("pharmacy_search.txt",search + "\n" +"userid= "+ id + "&" + text,'utf-8')
             if(result == ""){
                 result = "검색 결과가 없습니다."
                 add = ""
@@ -118,20 +145,10 @@ reactword = function (keymsg, msg, callback) {
             answer = search;
             break;
         case 'select' :
+            var pharmacy_status;
             var select_num = num_change(msg);
             var search = fs.readFileSync("pharmacy_search.txt", 'utf-8');
-            var pharmacy_status;
-            var a,b;
-            var ans;
-            search = search.split("userid= ")
-            for (var i = 0; i < search.length; i++) {
-                info = search[i].split(":")
-                a = info[1];
-                b = a.split(".");
-                if(b[0] == select_num){
-                    ans = b[1]
-                }
-            }
+            var ans = pharmacy_search(select_num);
             user_pharmacy(ans);
             pharmacy_status = status(ans);
             answer = ans + "\n\n재고 상태: " + pharmacy_status ;
