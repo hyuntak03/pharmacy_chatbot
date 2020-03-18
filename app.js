@@ -144,18 +144,19 @@ reactword = function (keymsg, msg, callback) {
         case "info_update":
             var last_data = fs.readFileSync("status.txt", 'utf-8')
             var data = fs.readFileSync("pharmacy.txt", 'utf-8');
-            var result;
-            data = data.split(".")
-            data = data[1];
-            data = data.split(":")
-            var search = data[0].toString().replace(/\n/g, "")
-            for (var i = 0; i < search.length; i++) {
-                if (search == id) {
-                    result = data[1].toString().replace(/\n/g, "")
-                    fs.writeFileSync("status.txt", last_data + "\n" + data[1] + ":" + msg, 'utf-8');
+            var user_id;
+            var addr;
+            data = data.split("\n")
+            for (var i = 0; i < data.length; i++) {
+                info = data[i].split(":");
+                user_id = info[0];
+                if (user_id == id) {
+                    addr = info[1];
                 }
             }
+            fs.writeFileSync("status.txt", last_data + "\n" + addr + ":" + msg, 'utf-8');
             answer = "정보가 업데이트 되었습니다.";
+            addans = "주소: " + addr + ":" + msg;
             break;
         case "status":
             var data = fs.readFileSync("status.txt",'utf-8')
