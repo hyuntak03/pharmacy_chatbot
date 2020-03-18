@@ -22,6 +22,8 @@ function detectword(stringmsg) {
         return "검색"
     }else if(isNaN(num) == false){
         return "select";
+    }else if(stringmsg.includes("재고 충분") || stringmsg.includes("재고 부족") || stringmsg.includes("판매 종료") || stringmsg.includes("정보 없음")){
+        return "info_update"
     }else {
         return stringmsg
     }
@@ -131,10 +133,7 @@ reactword = function (keymsg, msg, callback) {
             buttons = ["재고 충분", "재고 부족", "판매 종료", "정보 없음"]
             buttoncore = ["재고 충분", "재고 부족", "판매 종료", "정보 없음"]
             break;
-        case "재고 부족":
-        case "판매 종료":
-        case "정보 없음":
-        case "재고 충분":
+        case "info_update":
             var last_data = fs.readFileSync("status.txt", 'utf-8')
             var data = fs.readFileSync("pharmacy.txt", 'utf-8');
             var result;
