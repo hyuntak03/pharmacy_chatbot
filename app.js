@@ -92,9 +92,9 @@ reactword = function (keymsg, msg, callback) {
                     num +=1;
                     result += num + ". " + obj[i].name + " (" + obj[i].addr + ")\n\n"
                     text += ":"+num +"선. " + obj[i].name + " (" + obj[i].addr + ")\n\n"
-                    fs.writeFileSync("pharmacy_search.txt",search + "\n" +"userid= "+ id + text,'utf-8')
                 }
             }
+            fs.writeFileSync("pharmacy_search.txt",search + "\n" +"userid= "+ id + text,'utf-8')
             if(result == ""){
                 result = "검색 결과가 없습니다."
                 add = ""
