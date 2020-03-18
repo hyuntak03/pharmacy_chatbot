@@ -33,7 +33,7 @@ function detectword(stringmsg) {
         return "검색"
     }else if(isNaN(num) == false){
         return "select";
-    }else if(stringmsg.includes("재고 충분") || stringmsg.includes("재고 부족") || stringmsg.includes("판매 종료") || stringmsg.includes("정보 없음")){
+    }else if(stringmsg.includes("재고 충분") || stringmsg.includes("재고 부족") || stringmsg.includes("판매 종료")){
         return "info_update"
     }else {
         return stringmsg
